@@ -6,7 +6,7 @@ Link aplikasi Heroku yang sudah dideploy: https://tugas2maza.herokuapp.com/catal
 
 Jawaban:
 1. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya
-   /Bagan_MazayaNurLabiba.jpg
+   ![This is an image](/Bagan_MazayaNurLabiba.jpg)
    
 2. Jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html;
 
