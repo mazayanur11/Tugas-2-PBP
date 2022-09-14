@@ -21,5 +21,3 @@ urlpatterns = [
     path('', include('example_app.urls')),
     path('catalog/', include('katalog.urls')),
 ]
-
-# TODO: Implement Routings Here
