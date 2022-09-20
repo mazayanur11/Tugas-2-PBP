@@ -21,10 +21,10 @@ Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
 6. Melakukan git add, commit, dan push ke repositori github yang sesuai
 
 Screenshot akses URL HTML menggunakan Postman 
-![This is an image](/Postman_HTML_MazayaNurLabiba.jpg)
+![This is an image](/mywatchlist/Postman_HTML_MazayaNurLabiba.jpg)
 
 Screenshot akses URL XML menggunakan Postman 
-![This is an image](/Postman_XML_MazayaNurLabiba.jpg)
+![This is an image](/mywatchlist/Postman_XML_MazayaNurLabiba.jpg)
 
 Screenshot akses URL JSON menggunakan Postman 
-![This is an image](/Postman_JSON_MazayaNurLabiba.jpg)
+![This is an image](/mywatchlist/Postman_JSON_MazayaNurLabiba.jpg)
