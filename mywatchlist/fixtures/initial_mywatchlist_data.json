@@ -1,111 +1,111 @@
 [
     {
-        "model": "mywatchlist.MyWatchListItem",
+        "model": "mywatchlist.mywatchlistitem",
         "pk": 1,
         "fields": {
-            "watched": "Yes",
+            "watched": true,
             "title": "Doctor Strange in the Multiverse of Madness",
-            "release_date": "2022-9-10",
             "rating": 5,
+            "release_date": "2022-9-10",
             "review": "film yang sangat bagus"
         }
     },
     {
-        "model": "mywatchlist.MyWatchListItem",
+        "model": "mywatchlist.mywatchlistitem",
         "pk": 2,
         "fields": {
-            "watched": "Yes",
+            "watched": true,
             "title": "Mission: Impossible 7",
-            "release_date": "2022-9-11",
             "rating": 5,
+            "release_date": "2022-9-11",
             "review": "film yang menarik dan seru"
         }
     },
     {
-        "model": "mywatchlist.MyWatchListItem",
+        "model": "mywatchlist.mywatchlistitem",
         "pk": 3,
         "fields": {
-            "watched": "Yes",
+            "watched": true,
             "title": " Avengers: Infinity War",
-            "release_date": "2022-9-12",
             "rating": 4,
+            "release_date": "2022-9-12",
             "review": "film yang bagus dan seru"
         }
     },
     {
-        "model": "mywatchlist.MyWatchListItem",
+        "model": "mywatchlist.mywatchlistitem",
         "pk": 4,
         "fields": {
-            "watched": "No",
+            "watched": false,
             "title": "SIng 2",
-            "release_date": "2022-9-13",
             "rating": 2,
+            "release_date": "2022-9-13",
             "review": "penataan film kurang baik"
         }
     },
     {
-        "model": "mywatchlist.MyWatchListItem",
+        "model": "mywatchlist.mywatchlistitem",
         "pk": 5,
         "fields": {
-            "watched": "No",
+            "watched": false,
             "title": "The 355",
-            "release_date": "2022-9-14",
             "rating": 3,
+            "release_date": "2022-9-14",
             "review": "seru jika ditonton bersama teman-teman"
         }
     },
     {
-        "model": "mywatchlist.MyWatchListItem",
+        "model": "mywatchlist.mywatchlistitem",
         "pk": 6,
         "fields": {
-            "watched": "Yes",
+            "watched": true,
             "title": "Spider-Man: Into the Spider-Verse",
-            "release_date": "2022-9-15",
             "rating": 4,
+            "release_date": "2022-9-15",
             "review": "cerita yang sangat menarik"
         }
     },
     {
-        "model": "mywatchlist.MyWatchListItem",
+        "model": "mywatchlist.mywatchlistitem",
         "pk": 7,
         "fields": {
-            "watched": "No",
+            "watched": false,
             "title": "Scream",
-            "release_date": "2022-9-16",
             "rating": 4,
+            "release_date": "2022-9-16",
             "review": "film yang sangat bagus"
         }
     },
     {
-        "model": "mywatchlist.MyWatchListItem",
+        "model": "mywatchlist.mywatchlistitem",
         "pk": 8,
         "fields": {
-            "watched": "Yes",
+            "watched": true,
             "title": "Joker",
-            "release_date": "2022-9-17",
             "rating": 5,
+            "release_date": "2022-9-17",
             "review": "film yang menarik dan seru"
         }
     },
     {
-        "model": "mywatchlist.MyWatchListItem",
+        "model": "mywatchlist.mywatchlistitem",
         "pk": 9,
         "fields": {
-            "watched": "No",
+            "watched": false,
             "title": "Nightmare Alley",
-            "release_date": "2022-9-18",
             "rating": 3,
+            "release_date": "2022-9-18",
             "review": "seru jika ditonton bersama teman-teman"
         }
     },
     {
-        "model": "mywatchlist.MyWatchListItem",
+        "model": "mywatchlist.mywatchlistitem",
         "pk": 10,
         "fields": {
-            "watched": "No",
+            "watched": false,
             "title": "Morbius",
-            "release_date": "2022-9-19",
             "rating": 3,
+            "release_date": "2022-9-19",
             "review": "film yang sangat menarik dan seru"
         }
     }
