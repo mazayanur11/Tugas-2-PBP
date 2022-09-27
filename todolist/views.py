@@ -66,7 +66,7 @@ def logout_user(request):
     logout(request)
     return redirect('todolist:login')
 
-@login_required(login_url='login/')
+@login_required(login_url='/todolist/login/')
 def create_task(request):
     form = TaskForm(request.POST)
     if request.method == 'POST':
@@ -77,6 +77,7 @@ def create_task(request):
     context = {'form':form}
     return render(request, "create-task.html", context)
 
+@login_required(login_url='/todolist/login/')
 def status(request,id):
     status = Task.objects.get(pk=id)
     if status.is_finished:
@@ -86,6 +87,7 @@ def status(request,id):
     status.save()
     return HttpResponseRedirect(reverse('todolist:show_todolist'))
 
+@login_required(login_url='/todolist/login/')
 def hapus(request,id):
     hapus = Task.objects.get(pk=id)
     hapus.delete()
