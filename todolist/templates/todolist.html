@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Welcome {{user}}!</h3>
+<br>
+<button><a href="{% url 'todolist:create-task' %}">Tambah Task Baru</a></button>
+<button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+<br>
+<br>
+<table border="1">
+    <tr>
+    <th>Tanggal</th>
+    <th>Judul</th>
+    <th>Deskripsi</th>
+    </tr>
+    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
+    {% for todo in list_barang %}
+        <tr>
+            <th>{{todo.date}}</th>
+            <th>{{todo.title}}</th>
+            <th>{{todo.description}}</th>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+<br>
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+
+{% endblock content %}
