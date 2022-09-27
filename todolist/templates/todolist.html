@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <h3>Welcome {{user}}!</h3>
 <br>
@@ -12,6 +11,8 @@
     <th>Tanggal</th>
     <th>Judul</th>
     <th>Deskripsi</th>
+    <th>Status</th>
+    <th colspan="2">Detail</th>
     </tr>
     {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
     {% for todo in list_barang %}
@@ -19,11 +20,14 @@
             <th>{{todo.date}}</th>
             <th>{{todo.title}}</th>
             <th>{{todo.description}}</th>
+            {% if todo.is_finished %}
+            <th>Selesai</th>
+            {% else %}
+            <th>Belum Selesai</th>
+            {% endif %}
+            <th><button><a href="{% url 'todolist:status' todo.id %}">Ubah Status</a></button></th>
+            <th><button><a href="{% url 'todolist:hapus' todo.id %}">Hapus Task</a></button></th>
         </tr>
     {% endfor %}
 </table>
-<br>
-<br>
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-
 {% endblock content %}

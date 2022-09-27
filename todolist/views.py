@@ -76,3 +76,17 @@ def create_task(request):
         return redirect('todolist:show_todolist')
     context = {'form':form}
     return render(request, "create-task.html", context)
+
+def status(request,id):
+    status = Task.objects.get(pk=id)
+    if status.is_finished:
+        status.is_finished = False
+    else:
+        status.is_finished = True
+    status.save()
+    return HttpResponseRedirect(reverse('todolist:show_todolist'))
+
+def hapus(request,id):
+    hapus = Task.objects.get(pk=id)
+    hapus.delete()
+    return HttpResponseRedirect(reverse('todolist:show_todolist'))
