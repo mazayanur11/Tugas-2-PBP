@@ -24,5 +24,5 @@ Pertama, user memasukkan input kemudian melakukan submit di HTML form. Setelah i
 - Menampikan user dengan mengakses variable yang ada di context ({{username}}) dan membuat dua buah button yang masing-masing memiliki command untuk logout dan tambah task baru, kemudian membuat tabel untuk menampilkan data-data todolist yang sudah disubmit ke database
 - Membuat form baru di create-task.html agar user dapat membuat task baru melalui page tersebut
 - Membuat tombol ubah status dan hapus task di todolist.html, kemudian membuat fungsi status dan hapus dengan parameter request dan id untuk menjalankan tombol tersebut sesuai dengan task yang dituju, tidak lupa juga untuk menambahkan @login_required(login_url='/todolist/login/') diatas fungsi agar user wajib login dahulu untuk menjalankan tombol tersebut
-- Meng-import dan menambahkan path dari semua fungsi yang telah dibuat di views.py ke urls.py
+- Meng-import dan menambahkan path dari semua fungsi yang telah dibuat di views.py ke urls.py yang ada di folder todolist
 - Deploy ke heroku dan membuat 2 user dengan masing-masing 3 dummy list to do
