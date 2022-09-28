@@ -19,7 +19,7 @@ Pertama, user memasukkan input kemudian melakukan submit di HTML form. Setelah i
 - Menambahkan path('todolist/', include('todolist.urls')), di urls.py project_django agar dapat menjalankan fungsi show_todolist yang ada di views.py
 - Menambahkan 'todolist' di setting.py INSTALLED_APPS
 - Membuat class Task di model.py kemudian mengisinya dengan variabel user, date, title, description, is_finished
-- Membuat fungsi login, logout, register yang masing masing terhubung dengan login.html dan register.
+- Membuat fungsi login, logout, register yang masing masing terhubung dengan login.html dan register.html
 - Membuat restriksi agar user wajib login dahulu dengan menambahkan @login_required(login_url='/todolist/login/') diatas fungsi yang merupakan main dari project
 - Menampikan user dengan mengakses variable yang ada di context ({{username}}) dan membuat dua buah button yang masing-masing memiliki command untuk logout dan tambah task baru, kemudian membuat tabel untuk menampilkan data-data todolist yang sudah disubmit ke database
 - Membuat form baru di create-task.html agar ketika user dapat membuat task baru melalui page tersebut
