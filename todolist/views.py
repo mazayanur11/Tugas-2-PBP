@@ -9,14 +9,17 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from todolist.forms import TaskForm
+from django.contrib.auth.models import User
 
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
     username = request.user
     data_barang_wishlist = Task.objects.filter(user=username)
+    message = ""
     context = {
         'list_barang': data_barang_wishlist,
         'user': username,
+        'message': message,
     }
     return render(request, "todolist.html", context)
 
@@ -37,17 +40,30 @@ def show_xml_by_id(request, id):
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def register(request):
-    form = UserCreationForm()
-
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Akun telah berhasil dibuat!')
+        username = request.POST.get('username').lower()
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        password = ""
+
+        user = User.objects.filter(username = username)  
+        if password1 and password2 and password1 != password2:
+            messages.info(request, "Password berbeda")
+            password = None 
+        elif user.count():
+            messages.info(request, "Akun sudah pernah dibuat")
+            username = None 
+        else:
+            username = username
+            password = password2
+        
+        if username is not None and password is not None:
+            user = User.objects.create_user(username=username, password=password)
+            user.save()
+            messages.success(request, 'Akun telah dibuat!')
             return redirect('todolist:login')
-    
-    context = {'form':form}
-    return render(request, 'register.html', context)
+
+    return render(request, 'register.html')
 
 def login_user(request):
     if request.method == 'POST':
@@ -68,14 +84,20 @@ def logout_user(request):
 
 @login_required(login_url='/todolist/login/')
 def create_task(request):
-    form = TaskForm(request.POST)
-    if request.method == 'POST':
-        form.instance.user = request.user
-        if form.is_valid():
-            form.save()
-        return redirect('todolist:show_todolist')
-    context = {'form':form}
-    return render(request, "create-task.html", context)
+    if request.method == "POST":
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        if title != "" and description != "":
+            task = Task(
+                title=title,
+                description=description,
+                user=request.user,
+            )
+            task.save()
+            messages.success(request, "Task berhasil dibuat!")
+            return redirect("todolist:show_todolist")
+
+    return render(request, "create-task.html")
 
 @login_required(login_url='/todolist/login/')
 def status(request,id):

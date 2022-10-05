@@ -1,26 +1,50 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-<title>Create Task</title>
+<title>Create New Task</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    head, body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    }
+
+    body {
+      /* align-items: center; */
+      background: linear-gradient(#094f94cd, rgba(158, 18, 201, 0.4)); 
+    }
+
+</style>
+
 {% endblock meta %}
 
-{% block content %}  
+{% block content %}
+<main class="create-task w-100 m-auto text-center">
+    <nav class="navbar mb-0">
+        <div class="container-fluid">
+            <button class="btn btn-outline mb-0" type="button" onclick="location.href='/todolist/'" style="font-size:50px">⬅</button>
+        </div>
+    </nav>
+  <div class="content container-fluid" style="min-width:50px; max-width: 800px">
+    <h1 class="h1 mb-3 fw-semibold text-center">Buat Task Baru</h1>
+    <form method="POST" action="">
+      {% csrf_token %}
+      <div class="m-3">
+        <input style="float:right" type="text" name="title" class="form-control m-3" required id="title" placeholder="Judul">
+      </div>
+      <div class="m-3">
+        <textarea style="float:right" class="form-control m-3" name="description" required id="description" rows="4" placeholder="Deskripsi"></textarea>
+      </div>
+      <input class="mt-2 btn btn-lg btn-primary" type="submit" name="create" value="Buat" style="margin: 8px"></input>
+    </form>
 
-<div>
-    
-    <h1>Create Task</h1>  
-
-        <form method="POST" action="" enctype="multipart/form-data">  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><button>Create</button></td>
-                </tr>  
-            </table>  
-        </form>
-
-</div>  
-
+    {% if messages %}
+      {% for message in messages %}
+      <p class="text-muted">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+  </div>
+</main>
 {% endblock content %}

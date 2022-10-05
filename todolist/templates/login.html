@@ -2,44 +2,62 @@
 
 {% block meta %}
 <title>Login</title>
+<style>
+    head, body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background: linear-gradient(#094f94cd, rgba(158, 18, 201, 0.4));   
+    }
+
+    .form-login {
+      max-width: 400px;
+      padding: 25px;
+    }
+
+    .form-login .form-floating:focus-within {
+      z-index: 1;
+    }
+
+    .form-login input[type="text"] {
+      margin-bottom: 5px;
+    }
+
+    .form-login input[type="password"] {
+      margin-bottom: 5px;
+    }
+</style>
 {% endblock meta %}
 
 {% block content %}
-
-<div class = "login">
-
-    <h1>Login</h1>
-
+<main class="form-login w-100 m-auto text-center">
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+        <h1 class="h1 mb-3 fw-semibold">LOGIN</h1>
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="username" placeholder="Username" name="username">
+            <label for="username">Username</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+            <label for="password">Password</label>
+        </div>
+        <input class="w-100 mt-2 btn btn-lg btn-primary" type="submit" value="Login"></input>
 
-    {% if messages %}
-        <ul>
+        {% if messages %}
             {% for message in messages %}
-                <li>{{ message }}</li>
+                <p class="text-muted">{{ message }}</p>
             {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
-
-</div>
-
+        {% endif %}        
+        <p class="m-3 p-2">Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Create Account</a></p>        
+    </form>  
+</main>
 {% endblock content %}
