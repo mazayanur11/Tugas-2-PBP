@@ -13,7 +13,7 @@
 <br>
 2. Jelaskan tag HTML5 yang kamu ketahui.
 <ul>
-<li> <h> yang merupakan text dengan berbagai macam ukuran, h1 adalah ukuran terbesar kemudian h6 yang terkecil.
+<li> <!-- <h> yang merupakan text dengan berbagai macam ukuran, h1 adalah ukuran terbesar kemudian h6 yang terkecil. -->
 <li> <title> yang merupakan judul dari halaman website tersebut yang diletakkan di header.
 <li> <p> yang merupakan paragraf dalam website.
 <li> <br> yang merupakan jarak antar satu elemen dengan elemen lainnya.
