@@ -12,6 +12,7 @@
 </ul>
 <br>
 2. Jelaskan tag HTML5 yang kamu ketahui.
+<ul>
 <li> <!-- <h> yang merupakan text dengan berbagai macam ukuran, h1 adalah ukuran terbesar kemudian h6 yang terkecil. -->
 <li> <!-- <title> yang merupakan judul dari halaman website tersebut yang diletakkan di header. -->
 <li> <!-- <p> yang merupakan paragraf dalam website. -->
@@ -24,6 +25,7 @@
 <li> <!-- <form> yang merupakan suatu struktur form dalam website yang nantinya di dalam form tersebut dapat ditambahkan elemen lain seperti input, tombol, dan lain-lain. -->
 <li> <!-- <label> yang merupakan suatu text yang fleksibel dan dapat diatur style-nya. -->
 <li> <!-- dan masih banyak lagi tag lainnya -->
+</ul>
 <br>
 3. Jelaskan tipe-tipe CSS selector yang kamu ketahui.
 <ul>
