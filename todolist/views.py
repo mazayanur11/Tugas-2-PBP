@@ -94,7 +94,6 @@ def create_task(request):
                 user=request.user,
             )
             task.save()
-            messages.success(request, "Task berhasil dibuat!")
             return redirect("todolist:show_todolist")
 
     return render(request, "create-task.html")
