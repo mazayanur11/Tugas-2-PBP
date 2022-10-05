@@ -13,24 +13,24 @@
 <br>
 2. Jelaskan tag HTML5 yang kamu ketahui.
 <ul>
-<li> <!-- <h> yang merupakan text dengan berbagai macam ukuran, h1 adalah ukuran terbesar kemudian h6 yang terkecil. -->
-<li> <!-- <title> yang merupakan judul dari halaman website tersebut yang diletakkan di header. -->
-<li> <!-- <p> yang merupakan paragraf dalam website. -->
-<li> <!-- <br> yang merupakan jarak antar satu elemen dengan elemen lainnya. -->
-<li> <!-- <ul> dan <li> yang merupakan urutan list atau nomor dalam sebuah website. -->
-<li> <!-- <img> untuk menambahkan gambar dalam sebuah website. -->
-<li> <!-- <button> untuk menambahkan tombol dalam sebuah website. -->
-<li> <!-- <a href> untuk menghubungkan website ke sebuah link atau halaman website lain. -->
-<li> <!-- <input> untuk meminta input dari user berupa text, tombol, atau yang lainnya. -->
-<li> <!-- <form> yang merupakan suatu struktur form dalam website yang nantinya di dalam form tersebut dapat ditambahkan elemen lain seperti input, tombol, dan lain-lain. -->
-<li> <!-- <label> yang merupakan suatu text yang fleksibel dan dapat diatur style-nya. -->
-<li> <!-- dan masih banyak lagi tag lainnya -->
+<li> h yang merupakan text dengan berbagai macam ukuran, h1 adalah ukuran terbesar kemudian h6 yang terkecil.
+<li>title yang merupakan judul dari halaman website tersebut yang diletakkan di header.
+<li>p yang merupakan paragraf dalam website.
+<li>br yang merupakan jarak antar satu elemen dengan elemen lainnya.
+<li>ul dan  yang merupakan urutan list atau nomor dalam sebuah website.
+<li>img untuk menambahkan gambar dalam sebuah website.
+<li>button untuk menambahkan tombol dalam sebuah website.
+<li>a href untuk menghubungkan website ke sebuah link atau halaman website lain.
+<li>input untuk meminta input dari user berupa text, tombol, atau yang lainnya.
+<li>form yang merupakan suatu struktur form dalam website yang nantinya di dalam form tersebut dapat ditambahkan elemen lain seperti input, tombol, dan lain-lain.
+<li>label yang merupakan suatu text yang fleksibel dan dapat diatur style-nya.
+<li>dan masih banyak lagi tag lainnya
 </ul>
 <br>
 3. Jelaskan tipe-tipe CSS selector yang kamu ketahui.
 <ul>
 <li> Terdapat basic element selector dengan menuliskan tipe dari tag tersebut, seperti h1 {}, body {}, dan lain-lain.
-<li> (.) yang merupakan selector untuk element di dalam class dalam sebuah <!-- <div> -->.
+<li> (.) yang merupakan selector untuk element di dalam class dalam sebuah div.
 </ul>
 <br>
 4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
