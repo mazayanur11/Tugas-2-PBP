@@ -41,4 +41,5 @@
 <li> Mengubah function register dan create_task di views.py agar dapat menyesuaikan message yang ditampilkan serta data dari user yang dibuat dan task yang dibuat
 <li> Membuat card pada todolist.html sebanyak jumlah task yang telah dibuat atau akan dibuat dengan menerapkan for loop list_barang yang berisi semua task dari user yang sedang login
 <li> Karena saya menggunakan bootstrap dalam menghias keempat halaman web, jadi keempat halaman website tersebut sudah otomatis menjadi responsive
+<li> Membuat animasi hover pada card dengan internal CSS untuk mengedit transition card
 </ul>
