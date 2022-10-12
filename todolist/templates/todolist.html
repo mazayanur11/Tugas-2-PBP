@@ -66,7 +66,7 @@ body {
               </div>
             <div class="card-footer">
               <button class="btn btn-dark btn-sm m-2" style="float:left; background-color:rgb(46, 123, 46)"><a class="text-light" style="text-decoration:solid" href="/todolist/status/${data[i].pk}">Change Status</button>
-              <button type="button" class="btn btn-primary btn-sm m-2" style="float:right; background-color:crimson" onclick="location.href='/todolist/hapus/(${data[i].pk})'">Hapus Task</button>
+              <button type="button" class="btn btn-primary btn-sm m-2" style="float:right; background-color:crimson"><a class="text-light" style="text-decoration:solid" href="/todolist/hapus/${data[i].pk}">Hapus Task</button>
             </div>
           </div>`)
         }
@@ -86,7 +86,7 @@ body {
               </div>
             <div class="card-footer">
               <button class="btn btn-dark btn-sm m-2" style="float:left; background-color:rgb(46, 123, 46)"><a class="text-light" style="text-decoration:solid" href="/todolist/status/${resp.pk}">Change Status</button>
-              <button type="button" class="btn btn-primary btn-sm m-2" style="float:right; background-color:crimson" onclick="location.href='/todolist/hapus/(${resp.pk})'">Hapus Task</button>
+              <button type="button" class="btn btn-primary btn-sm m-2" style="float:right; background-color:crimson"><a class="text-light" style="text-decoration:solid" href="/todolist/hapus/${resp.pk}">Hapus Task</button>
             </div>
           </div>`)
           }
