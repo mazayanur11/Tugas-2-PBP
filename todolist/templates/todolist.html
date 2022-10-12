@@ -52,6 +52,69 @@ body {
     transform: scale(1.1);
   }
  </style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script>
+  $(document).ready(function(){
+      $.get("/todolist/json", function(data) {
+        for (i=0; i < data.length; i++){
+          $(".row").append(`<div class="card col-lg-4 col-md-6 col-sm-12" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold">${data[i].fields.title}</h5>
+              <p class="card-subtitle m-2 text-muted">Dibuat pada: ${data[i].fields.date}</p>
+              ${!data[i].fields.is_finished ? '<h6 class="subtitleNo">Belum Selesai</h6>' : '<h6 class="subtitleYes">Selesai</h6>'}
+              <p class="card-text">${data[i].fields.description}</p>
+              </div>
+            <div class="card-footer">
+              <button class="btn btn-dark btn-sm m-2" style="float:left; background-color:rgb(46, 123, 46)"><a class="text-light" style="text-decoration:solid" href="/todolist/status/${data[i].pk}">Change Status</button>
+              <button type="button" class="btn btn-primary btn-sm m-2" style="float:right; background-color:crimson" onclick="location.href='/todolist/hapus/(${data[i].pk})'">Hapus Task</button>
+            </div>
+          </div>`)
+        }
+      });
+
+      $("#create-btn").click(function(){
+        const title = $("#judul").val()
+        const description = $("#deskripsi").val()
+        const data = {title:title,description:description,csrfmiddlewaretoken:'{{ csrf_token }}'}
+        $.ajax({url:"/todolist/add_task/",data:data,method:"POST"}).done(function (resp) {
+          $(".row").append(`<div class="card col-lg-4 col-md-6 col-sm-12 h-100" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold">${resp.fields.title}</h5>
+              <p class="card-subtitle m-2 text-muted">Dibuat pada: ${resp.fields.date}</p>
+              ${!resp.fields.is_finished ? '<h6 class="subtitleNo">Belum Selesai</h6>' : '<h6 class="subtitleYes">Selesai</h6>'}
+              <p class="card-text">${resp.fields.description}</p>
+              </div>
+            <div class="card-footer">
+              <button class="btn btn-dark btn-sm m-2" style="float:left; background-color:rgb(46, 123, 46)"><a class="text-light" style="text-decoration:solid" href="/todolist/status/${resp.pk}">Change Status</button>
+              <button type="button" class="btn btn-primary btn-sm m-2" style="float:right; background-color:crimson" onclick="location.href='/todolist/hapus/(${resp.pk})'">Hapus Task</button>
+            </div>
+          </div>`)
+          }
+        )
+      })
+
+      // $(`#${resp.pk}`).click(function () {
+      //     $.ajax({
+      //       url: `/todolist/hapus/${resp.pk}`,
+      //       type: 'DELETE',
+      //       success: function (response) {
+      //         $(`#${resp.pk}-card`).remove()
+      //       },
+      //     })
+      //   })
+    });
+    
+    // function delDB(val){
+    //   $.ajax({
+    //     type :"DELETE",
+    //     csrfmiddlewaretoken: "{{ csrf_token }}",
+    //     url :`/todolist/hapus/${val}`,
+    //     success: function () {
+    //       $(`#${resp.pk}`).remove()
+    //     },
+    //   })
+    // }
+ </script>
 {% endblock meta %}
 
 {% block content %}
@@ -60,36 +123,61 @@ body {
     <div class="header text-center">
         <h2 class="fw-semibold m-5">Welcome, {{user.get_username}}!</h2>
     </div>
-    
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
-            {% for task in list_barang %}
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title fw-semibold">{{task.title}}</h5>
-                        <h6 class="card-subtitle m-2 text-muted">Dibuat pada {{task.date}}</h6>
-                        {% if task.is_finished %}
-                        <h6 class="subtitleYes">Selesai</h6>
-                        {% else %}
-                        <h6 class="subtitleNo">Belum Selesai</h6>
-                        {% endif %}
-                        <p class="card-text">{{task.description}}</p>
-                    </div>
-                    <div class="card-footer">
-                        <button type="button" class="btn btn-dark btn-sm m-2" style="float:center; background-color:rgb(46, 123, 46)"><a class="text-light" href="{% url 'todolist:status' task.id %}" style="text-decoration:solid">Ubah Status</a></button>
-                        <button type="button" class="btn btn-primary btn-sm m-2" style="float:center; background-color:crimson"><a class="text-light" href="{% url 'todolist:hapus' task.id %}" style="text-decoration:solid">Hapus</a></button>
-                    </div>
-                </div>
-            </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Task Baru</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Judul:</label>
+            <input type="text" class="form-control" id="judul">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Deskripsi:</label>
+            <textarea class="form-control" id="deskripsi"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="create-btn" data-bs-dismiss="modal" value="submit">Buat</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 gap-4 justify-content-center">
+    {% for task in list_barang %}
+    <!-- <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title fw-semibold">{{task.title}}</h5>
+          <h6 class="card-subtitle m-2 text-muted">Dibuat pada {{task.date}}</h6>
+          {% if task.is_finished %}
+          <h6 class="subtitleYes">Selesai</h6>
+          {% else %}
+          <h6 class="subtitleNo">Belum Selesai</h6>
+          {% endif %}
+          <p class="card-text">{{task.description}}</p>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-dark btn-sm m-2" style="float:center; background-color:rgb(46, 123, 46)"><a class="text-light" href="{% url 'todolist:status' task.id %}" style="text-decoration:solid">Ubah Status</a></button>
+          <button type="button" class="btn btn-primary btn-sm m-2" style="float:center; background-color:crimson"><a class="text-light" href="{% url 'todolist:hapus' task.id %}" style="text-decoration:solid">Hapus</a></button>
+        </div>
+      </div>
+    </div> -->
             {% endfor %}
       </div>
     </div>
-
+    
     <div class="button text-center">
-        <button type="button" class="btn btn-primary btn-lg mt-5 mb-5 fw-bold m-auto" onclick="location.href='/todolist/create-task'">Tambah Task</button> 
-        <button class="btn btn-primary btn-lg mt-5 mb-5 fw-bold m-auto" type="button" onclick="location.href='/todolist/logout'">Logout</button>
+      <button type="button" class="btn btn-primary btn-lg mt-5 mb-5 fw-bold m-auto" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Tambah Task Baru</button>
+      <button class="btn btn-primary btn-lg mt-5 mb-5 fw-bold m-auto" type="button" onclick="location.href='/todolist/logout'">Logout</button>
     </div>
-</div>
+  </div>
 </main>
 {% endblock content %}

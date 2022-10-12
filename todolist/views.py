@@ -6,10 +6,12 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
 from todolist.forms import TaskForm
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect, get_object_or_404
 
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
@@ -28,7 +30,7 @@ def show_xml(request):
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
-    data = Task.objects.all()
+    data = Task.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_json_by_id(request, id):
@@ -113,3 +115,27 @@ def hapus(request,id):
     hapus = Task.objects.get(pk=id)
     hapus.delete()
     return HttpResponseRedirect(reverse('todolist:show_todolist'))
+
+@login_required(login_url='/todolist/login/')
+def add_task(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        deskripsi = request.POST.get('description')
+        todo = Task.objects.create(title=title,description=deskripsi,date=datetime.date.today(),user=request.user)
+        hasil = {
+            'fields':{
+                'title':todo.title,
+                'date':todo.date,
+                'description':todo.description,
+                'status':todo.is_finished,
+            },
+            'pk':todo.pk
+        }
+        return JsonResponse(hasil)
+
+def delete_task(request,id):
+    if request.method == "DELETE":
+        task = get_object_or_404(Task, id = id)
+        task.delete()
+
+    return HttpResponse(status=202)
