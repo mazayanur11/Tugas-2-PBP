@@ -57,7 +57,7 @@ body {
   $(document).ready(function(){
       $.get("/todolist/json", function(data) {
         for (i=0; i < data.length; i++){
-          $(".row").append(`<div class="card col-lg-4 col-md-6 col-sm-12" style="width: 18rem;">
+          $(".row").append(`<div class="card col-lg-4 col-md-6 col-sm-12 h-100" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title fw-semibold">${data[i].fields.title}</h5>
               <p class="card-subtitle m-2 text-muted">Dibuat pada: ${data[i].fields.date}</p>
