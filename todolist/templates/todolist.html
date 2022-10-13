@@ -57,7 +57,7 @@ body {
   $(document).ready(function(){
       $.get("/todolist/json", function(data) {
         for (i=0; i < data.length; i++){
-          $(".row").append(`<div class="card col-lg-4 col-md-6 col-sm-12 h-100" style="width: 18rem;">
+          $(".row").append(`<div id="task-${data[i].pk}" class="card col-lg-4 col-md-6 col-sm-12" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title fw-semibold">${data[i].fields.title}</h5>
               <p class="card-subtitle m-2 text-muted">Dibuat pada: ${data[i].fields.date}</p>
@@ -65,8 +65,8 @@ body {
               <p class="card-text">${data[i].fields.description}</p>
               </div>
             <div class="card-footer">
-              <button class="btn btn-dark btn-sm m-2" style="float:left; background-color:rgb(46, 123, 46)"><a class="text-light" style="text-decoration:solid" href="/todolist/status/${data[i].pk}">Change Status</button>
-              <button type="button" class="btn btn-primary btn-sm m-2" style="float:right; background-color:crimson"><a class="text-light" style="text-decoration:solid" href="/todolist/hapus/${data[i].pk}">Hapus Task</button>
+              <button class="btn btn-dark btn-sm m-2" style="float:left; background-color:rgb(46, 123, 46)"><a class="text-light" style="text-decoration:solid" href="/todolist/status/${data[i].pk}">Ubah Status</a></button>
+              <button class="btn btn-primary btn-sm m-2" style="float:right; background-color:crimson" onclick=deleteTask(${data[i].pk})>Hapus Task</button>
             </div>
           </div>`)
         }
@@ -77,7 +77,7 @@ body {
         const description = $("#deskripsi").val()
         const data = {title:title,description:description,csrfmiddlewaretoken:'{{ csrf_token }}'}
         $.ajax({url:"/todolist/add_task/",data:data,method:"POST"}).done(function (resp) {
-          $(".row").append(`<div class="card col-lg-4 col-md-6 col-sm-12 h-100" style="width: 18rem;">
+          $(".row").append(`<div id="task-${resp.pk}" class="card col-lg-4 col-md-6 col-sm-12" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title fw-semibold">${resp.fields.title}</h5>
               <p class="card-subtitle m-2 text-muted">Dibuat pada: ${resp.fields.date}</p>
@@ -85,35 +85,25 @@ body {
               <p class="card-text">${resp.fields.description}</p>
               </div>
             <div class="card-footer">
-              <button class="btn btn-dark btn-sm m-2" style="float:left; background-color:rgb(46, 123, 46)"><a class="text-light" style="text-decoration:solid" href="/todolist/status/${resp.pk}">Change Status</button>
-              <button type="button" class="btn btn-primary btn-sm m-2" style="float:right; background-color:crimson"><a class="text-light" style="text-decoration:solid" href="/todolist/hapus/${resp.pk}">Hapus Task</button>
+              <button class="btn btn-dark btn-sm m-2" style="float:left; background-color:rgb(46, 123, 46)"><a class="text-light" style="text-decoration:solid" href="/todolist/status/${resp.pk}">Ubah Status</a></button>
+              <button class="btn btn-primary btn-sm m-2" style="float:right; background-color:crimson" onclick=deleteTask(${resp.pk})>Hapus Task</button>
             </div>
           </div>`)
           }
         )
       })
-
-      // $(`#${resp.pk}`).click(function () {
-      //     $.ajax({
-      //       url: `/todolist/hapus/${resp.pk}`,
-      //       type: 'DELETE',
-      //       success: function (response) {
-      //         $(`#${resp.pk}-card`).remove()
-      //       },
-      //     })
-      //   })
     });
     
-    // function delDB(val){
-    //   $.ajax({
-    //     type :"DELETE",
-    //     csrfmiddlewaretoken: "{{ csrf_token }}",
-    //     url :`/todolist/hapus/${val}`,
-    //     success: function () {
-    //       $(`#${resp.pk}`).remove()
-    //     },
-    //   })
-    // }
+    var deleteTask = function(pk) {
+      $.ajax({
+            type: "DELETE",
+            headers: { "X-CSRFToken": document.getElementsByName("csrfmiddlewaretoken")[0].value },
+            url: "{% url 'todolist:delete_task_ajax' 1 %}".replace(1, pk),
+            encode: true,
+          }).done(function (data) {
+            document.getElementById(`task-${pk}`).remove();
+          })
+    }
  </script>
 {% endblock meta %}
 
@@ -132,6 +122,7 @@ body {
           </div>
           <div class="modal-body">
             <form>
+              {% csrf_token %}
               <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Judul:</label>
             <input type="text" class="form-control" id="judul">
@@ -151,29 +142,8 @@ body {
 </div>
 <div class="container">
   <div class="row row-cols-1 row-cols-md-3 gap-4 justify-content-center">
-    {% for task in list_barang %}
-    <!-- <div class="col">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title fw-semibold">{{task.title}}</h5>
-          <h6 class="card-subtitle m-2 text-muted">Dibuat pada {{task.date}}</h6>
-          {% if task.is_finished %}
-          <h6 class="subtitleYes">Selesai</h6>
-          {% else %}
-          <h6 class="subtitleNo">Belum Selesai</h6>
-          {% endif %}
-          <p class="card-text">{{task.description}}</p>
-        </div>
-        <div class="card-footer">
-          <button type="button" class="btn btn-dark btn-sm m-2" style="float:center; background-color:rgb(46, 123, 46)"><a class="text-light" href="{% url 'todolist:status' task.id %}" style="text-decoration:solid">Ubah Status</a></button>
-          <button type="button" class="btn btn-primary btn-sm m-2" style="float:center; background-color:crimson"><a class="text-light" href="{% url 'todolist:hapus' task.id %}" style="text-decoration:solid">Hapus</a></button>
-        </div>
-      </div>
-    </div> -->
-            {% endfor %}
-      </div>
-    </div>
-    
+  </div>
+</div> 
     <div class="button text-center">
       <button type="button" class="btn btn-primary btn-lg mt-5 mb-5 fw-bold m-auto" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Tambah Task Baru</button>
       <button class="btn btn-primary btn-lg mt-5 mb-5 fw-bold m-auto" type="button" onclick="location.href='/todolist/logout'">Logout</button>

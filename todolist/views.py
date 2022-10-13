@@ -133,9 +133,17 @@ def add_task(request):
         }
         return JsonResponse(hasil)
 
-def delete_task(request,id):
-    if request.method == "DELETE":
-        task = get_object_or_404(Task, id = id)
-        task.delete()
-
-    return HttpResponse(status=202)
+@login_required(login_url='/todolist/login/')
+def delete_task_ajax(request, id):
+    todo = Task.objects.get(pk=id)
+    todo.delete()
+    hasil = {
+            'fields':{
+                'title':todo.title,
+                'date':todo.date,
+                'description':todo.description,
+                'status':todo.is_finished,
+            },
+            'pk':todo.pk
+        }
+    return JsonResponse(hasil)
